@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "contacts": {
+      "title": "Contacts",
+      "description": "Saved user contacts",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "about": { "type": "string" },
+        "avatar": { "type": "string" },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "string" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "chats": {
+      "title": "Chats",
+      "description": "Chat conversations",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "isGroup": { "type": "boolean" }
+      },
+      "required": ["id", "name"]
+    },
+    "messages": {
+      "title": "Messages",
+      "description": "Chat messages",
+      "properties": {
+        "id": { "type": "string" },
+        "chatId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "content": { "type": "string" }
+      },
+      "required": ["id", "chatId", "senderId"]
+    },
+    "statuses": {
+      "title": "Status Updates",
+      "description": "User status stories",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "text": { "type": "string" }
+      },
+      "required": ["id", "userId"]
+    },
+    "calls": {
+      "title": "Call Logs",
+      "description": "Voice and video call history",
+      "properties": {
+        "id": { "type": "string" },
+        "callerName": { "type": "string" },
+        "type": { "type": "string" }
+      },
+      "required": ["id", "callerName"]
+    }
+  }
+}
