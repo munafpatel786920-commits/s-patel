@@ -6,10 +6,7 @@ import {
   Lock,
   ShieldCheck,
   Palette,
-  HardDrive,
   UserCheck,
-  Trash2,
-  RotateCcw,
   CheckCircle2,
   Eye,
   KeyRound,
@@ -43,8 +40,6 @@ export const SettingsView: React.FC = () => {
     unblockUser,
     chatWallpaper,
     setChatWallpaper,
-    clearSampleData,
-    restoreSampleData,
     contacts
   } = useChat();
 
@@ -676,47 +671,6 @@ export const SettingsView: React.FC = () => {
                 ))}
               </div>
             )}
-          </div>
-        </div>
-
-        {/* SECTION 4: DATA & SAMPLE CONTENT MANAGEMENT */}
-        <div className={`border rounded-2xl p-6 space-y-4 shadow-xs transition-colors ${
-          theme === 'dark' ? 'bg-slate-900 border-slate-800' : 'bg-white border-[#e9edef]'
-        }`}>
-          <h3 className="font-bold text-sm flex items-center gap-2 border-b pb-3 border-[#e9edef] dark:border-slate-800">
-            <HardDrive className="w-4 h-4 text-[#00a884]" />
-            Data & Sample Content Controls
-          </h3>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-2">
-            <div>
-              <p className="font-bold text-xs">Sample Demo Data Management</p>
-              <p className={`text-[11px] ${theme === 'dark' ? 'text-slate-400' : 'text-[#667781]'}`}>
-                Reset or clear all local sample chats, messages, status updates, and call history.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                onClick={() => {
-                  clearSampleData();
-                  showNotification('All sample demo data deleted successfully.');
-                }}
-                className="px-4 py-2 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <Trash2 className="w-4 h-4" />
-                Delete Sample Data
-              </button>
-              <button
-                onClick={() => {
-                  restoreSampleData();
-                  showNotification('Default sample data restored successfully.');
-                }}
-                className="px-4 py-2 rounded-xl bg-[#f0f2f5] dark:bg-slate-800 hover:bg-[#e9edef] text-[#111b21] dark:text-slate-100 border border-[#e9edef] dark:border-slate-700 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <RotateCcw className="w-4 h-4 text-[#00a884]" />
-                Restore Sample Data
-              </button>
-            </div>
           </div>
         </div>
 
