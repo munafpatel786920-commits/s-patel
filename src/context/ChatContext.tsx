@@ -493,7 +493,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       );
     }
 
-    // Auto-respond if messaging ChatConnect AI Assistant
+    // Auto-respond ONLY if messaging ChatConnect AI Assistant
     if (chatId === 'chat_ai_bot') {
       setTimeout(async () => {
         try {
@@ -525,51 +525,6 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error('AI response error:', err);
         }
       }, 800);
-    } else {
-      // Simulate realistic counter-party response after a short delay if in mock 1-on-1 chats
-      const targetChat = (chats || []).find((c) => c.id === chatId);
-      const targetParts = targetChat?.participants || [];
-      if (targetChat && !targetChat.isGroup && targetParts.length > 1) {
-        const otherUser = targetParts.find((p) => p.id !== currentUser.id);
-        if (otherUser && otherUser.id !== 'user_ai_assistant') {
-          // Show typing indicator
-          setTypingStatus(chatId, true);
-          setTimeout(() => {
-            setTypingStatus(chatId, false);
-            const cannedReplies = [
-              "Got it! Thanks for sharing.",
-              "That looks awesome! Let me check it out.",
-              "Sounds good to me 👍",
-              "Will review this and get back to you in a few minutes!",
-              "Awesome! Great work."
-            ];
-            const replyText = cannedReplies[Math.floor(Math.random() * cannedReplies.length)];
-            const replyMsg: ChatMessage = {
-              id: `msg_reply_${Date.now()}`,
-              chatId,
-              senderId: otherUser.id,
-              type: 'text',
-              content: replyText,
-              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              status: 'read'
-            };
-
-            setMessages((prev) => ({
-              ...prev,
-              [chatId]: [...(prev[chatId] || []), replyMsg]
-            }));
-
-            setChats((prev) =>
-              prev.map((c) =>
-                c.id === chatId ? { ...c, lastMessage: replyMsg } : c
-              )
-            );
-
-            setDoc(doc(db, 'messages', replyMsg.id), replyMsg).catch(console.error);
-            setDoc(doc(db, 'chats', chatId), { lastMessage: replyMsg }, { merge: true }).catch(console.error);
-          }, 2500);
-        }
-      }
     }
   };
 
